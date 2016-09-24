@@ -11,8 +11,7 @@ class GetCookie(object):
         failure = 0
         while failure < 2:
             try:
-                browser = webdriver.PhantomJS(
-                    executable_path="/usr/local/bin/phantomjs")
+                browser = webdriver.PhantomJS()
                 wait = ui.WebDriverWait(browser, 10)
                 browser.get(
                     'http://qzone.qq.com/?s_url=http://user.qzone.qq.com/869810754/')

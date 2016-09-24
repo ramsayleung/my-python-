@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 # -*- coding:utf-8 -*-
 from scrapy.spiders import CrawlSpider, Rule
 # from scrapy.selector import Selector
@@ -19,7 +19,8 @@ class QQSpider(CrawlSpider):
     def __init__(self):
         self.account = raw_input("input your login account: ")
         self.password = raw_input("input your password: ")
-        self.account_for_crawl = input("input the account you want to crawl:")
+        self.account_for_crawl = raw_input(
+            "input the account you want to crawl:")
         self.get_cookie_instance = get_cookie.GetCookie()
         self.get_cookie = self.get_cookie_instance.getCookie(self.account,
                                                              self.password)
@@ -54,15 +55,18 @@ class QQSpider(CrawlSpider):
             album_id = album_list['id']
             total_photo = album_list['total']
             print(album_id, total_photo)
-            image_url = "http://h5.qzone.qq.com/webapp/json/mqzone_photo/getPhotoList2?g_tk=" + \
-                        str(self.gtk) +\
-                        "&uin="+str(self.account_for_crawl)+"&albumid=" + album_id + "&ps=0&pn=" + \
-                str(total_photo) + \
-                "&password=&password_cleartext=0&swidth=1920&sheight=1080&sid=Pp7O26sWwPQbVfSPlzR0XBaL7ZpyXD9D33d842420201%3D%3D"
-            yield Request(
-                image_url,
-                callback=self.parse_image,
-                cookies=self.get_cookie, )
+            #qq空间最多只会返回200条数据
+            counter = 0
+            while counter < total_photo:
+                image_url = "http://h5.qzone.qq.com/webapp/json/mqzone_photo/getPhotoList2?g_tk=" + \
+                            str(self.gtk) +\
+                            "&uin="+str(self.account_for_crawl)+"&albumid=" + album_id + "&ps="+str(counter)+"&pn=" + \
+                            str(total_photo) +"&password=&password_cleartext=0&swidth=1920&sheight=1080&sid=Pp7O26sWwPQbVfSPlzR0XBaL7ZpyXD9D33d842420201%3D%3D"
+                counter += 200
+                yield Request(
+                    image_url,
+                    callback=self.parse_image,
+                    cookies=self.get_cookie, )
 
     def parse_image(self, response):
         # print(response.body)
