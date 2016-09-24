@@ -3,3 +3,5 @@
 
 注意事项:更改setting.py里面的IMAGES_STORE 值，
 安装phantomjs ，并且在get_cookie里面更改phantomjs的安装路径
+备注：
+感谢[QQSpider](https://github.com/LiuXingMing/QQSpider)的启发
