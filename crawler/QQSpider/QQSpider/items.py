@@ -13,4 +13,5 @@ class QqspiderItem(scrapy.Item):
     album_name = scrapy.Field()
     image_urls = scrapy.Field()
     image = scrapy.Field()
+    account = scrapy.Field()
     # pass

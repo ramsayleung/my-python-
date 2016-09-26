@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # encoding=utf-8
+import logging
 import time
 from selenium import webdriver
 import selenium.webdriver.support.ui as ui
@@ -45,6 +46,7 @@ class GetCookie(object):
                     print account, d
                     if u'您输入的帐号或密码不正确' in d:
                         print 'Failed!----------------reason:账号或者密码错误！'
+                        logging.error("账号或者密码错误")
                         break
                     if u'网络繁忙' in d:
                         time.sleep(2)

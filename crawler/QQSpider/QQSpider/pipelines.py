@@ -25,8 +25,9 @@ class QQImagesPipelines(ImagesPipeline):
     def file_path(self, request, response=None, info=None):
         item = request.meta['item']
         # 从URL提取图片的文件名
-        # 拼接最终的文件名,格式:full/{相册名}/图片文件名.jpg
+        # 拼接最终的文件名,格式:qq号/{相册名}/图片文件名.jpg
         image_guid = request.url.split('/')[-3]
         log.msg(image_guid, level=log.DEBUG)
-        filename = u'full/{0[album_name]}/{1}.jpg'.format(item, image_guid)
+        filename = u'{0[account]}/{0[album_name]}/{1}.jpg'.format(item,
+                                                                  image_guid)
         return filename
