@@ -84,20 +84,25 @@ class QQSpider(CrawlSpider):
 
     def parse_image(self, response):
         # print(response.body)
-        item = response.meta['item']
-        with open("photos.json", "wt") as photos_json:
-            photos_json.write(response.body)
-        with open("photos.json") as photos_json:
-            photos = json.load(photos_json)
-        album_name = photos['data']['album']['name']
-        item['album_name'] = album_name
-        image_urls = []
-        for key in photos['data']['photos'].keys():
-            for photo in photos['data']['photos'][key]:
-                image_url = photo['1']['url']
-                image_urls.append(image_url)
-        item['image_urls'] = image_urls
-        yield item
+        try:
+
+            item = response.meta['item']
+            with open("photos.json", "wt") as photos_json:
+                photos_json.write(response.body)
+            with open("photos.json") as photos_json:
+                photos = json.load(photos_json)
+            album_name = photos['data']['album']['name']
+            item['album_name'] = album_name
+            image_urls = []
+            for key in photos['data']['photos'].keys():
+                for photo in photos['data']['photos'][key]:
+                    image_url = photo['1']['url']
+                    image_urls.append(image_url)
+            item['image_urls'] = image_urls
+            yield item
+
+        except KeyError:
+            logging.error("你的登陆账号没有权限查看该账号的该相册")
 
     def replaceAll(self, filename, searchExp, replaceExp):
         for line in fileinput.input(files=(filename), inplace=1):
