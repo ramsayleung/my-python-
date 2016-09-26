@@ -41,7 +41,7 @@ class QQSpider(CrawlSpider):
                 url="http://h5.qzone.qq.com/proxy/domain/alist.photo.qq.com/fcgi-bin/fcg_list_album_v3?g_tk=%s"
                 "&callback=shine0_Callback&t=955106858&hostUin=%s"
                 "&uin=%s"
-                "&appid=4&inCharset=utf-8&outCharset=utf-8&source=qzone&plat=qzone&format=jsonp&notice=0&filter=1&handset=4&pageNumModeSort=40&pageNumModeClass=15&needUserInfo=1&idcNum=0&callbackFun=shine0&_=1474681546872&mode=2&sortOrder=2&pageStart=30&pageNum=60"
+                "&appid=4&inCharset=utf-8&outCharset=utf-8&source=qzone&plat=qzone&format=jsonp&notice=0&filter=1&handset=4&pageNumModeSort=40&pageNumModeClass=15&needUserInfo=1&idcNum=0&callbackFun=shine0&_=1474681546872&mode=2&sortOrder=2&pageStart=0&pageNum=60"
                 % (self.gtk, account_for_crawl, self.account),
                 cookies=self.cookie,
                 meta={'item': item},
