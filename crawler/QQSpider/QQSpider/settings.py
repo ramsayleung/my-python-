@@ -64,11 +64,7 @@ ROBOTSTXT_OBEY = True
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {'QQSpider.pipelines.QQImagesPipelines': 1, }
-IMAGES_STORE = '/home/samray/Videos'
-IMAGES_THUMBS = {  #缩略图的尺寸，设置这个值就会产生缩略图
-    'small': (50, 50),
-    'big': (200, 200),
-}
+IMAGES_STORE = '/home/samray/Pictures'
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
 #AUTOTHROTTLE_ENABLED = True

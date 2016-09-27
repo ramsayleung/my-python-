@@ -85,14 +85,12 @@ class QQSpider(CrawlSpider):
     def parse_image(self, response):
         # print(response.body)
         try:
-
-            item = response.meta['item']
-            with open("photos.json", "wt") as photos_json:
-                photos_json.write(response.body)
-            with open("photos.json") as photos_json:
-                photos = json.load(photos_json)
-            album_name = photos['data']['album']['name']
-            item['album_name'] = album_name
+            item = QqspiderItem()
+            item['account'] = response.meta['item']['account']
+            photos = json.loads(response.body)
+            item['album_name'] = photos['data']['album']['name']
+            logging.debug("albumid:" + photos['data']['album']['albumid'])
+            logging.debug("album name: " + item['album_name'])
             image_urls = []
             for key in photos['data']['photos'].keys():
                 for photo in photos['data']['photos'][key]:
